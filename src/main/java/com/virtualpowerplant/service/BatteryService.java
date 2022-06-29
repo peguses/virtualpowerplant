@@ -7,7 +7,6 @@ import com.virtualpowerplant.dto.BatteryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.AbstractList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -53,7 +52,7 @@ public class BatteryService {
     }
 
     private BatteryDTO batteryToBatteryDTO(Battery battery) {
-        return new BatteryDTO(Objects.nonNull(battery.getId()) ? battery.getId() : null,
+        return new BatteryDTO(Objects.nonNull(battery.getUuid()) ? battery.getUuid() : null,
                 battery.getName(),
                 battery.getPostcode(),
                 battery.getCapacity());
