@@ -11,11 +11,11 @@ public class ErrorResponse {
     private final String message;
     private final String requestId;
 
-    private static final SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
     public ErrorResponse(String message, String requestId) {
         this.message = message;
         this.requestId = requestId;
-        this.timeStamp =  sdf1.format(new Date().getTime());
+        this.timeStamp =  sdf.format(new Date().getTime());
     }
 }
