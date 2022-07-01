@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Data
 @Table(name = "batteries")
@@ -14,7 +16,8 @@ import java.util.UUID;
 public class Battery {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = SEQUENCE, generator = "seqGen")
+    @SequenceGenerator(name = "seqGen", sequenceName = "seq", initialValue = 1)
     @Column(name = "id")
     private Integer id;
     private String name;

@@ -15,7 +15,7 @@ public class BatteryDTO {
     private UUID uuid;
     @NotBlank(message = "Battery name cannot be blank")
     private String name;
-    @NotNull(message = "Postcode name cannot be blank")
+    @NotNull(message = "Postcode name cannot be null")
     private Integer postcode;
     @NotNull(message = "Capacity name cannot be null")
     private Integer capacity;

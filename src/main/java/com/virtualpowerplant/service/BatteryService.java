@@ -6,6 +6,8 @@ import com.virtualpowerplant.dto.BatteriesStatisticsDTO;
 import com.virtualpowerplant.dto.BatteryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,15 +18,6 @@ public class BatteryService {
 
     @Autowired
     BatteryRepository batteryRepository;
-
-    public List<BatteryDTO> getAll() {
-        List<Battery> b = batteryRepository.findAll();
-        return batteryRepository
-                .findAll()
-                .stream()
-                .map(battery -> batteryToBatteryDTO(battery))
-                .collect(Collectors.toList());
-    }
 
     public BatteriesStatisticsDTO getAllInPostcodeRange(Integer minPostcode, Integer maxPostCode) {
         List<BatteryDTO> batteryDTOS = batteryRepository.findPostcodeBetweenNative(minPostcode, maxPostCode)
@@ -37,6 +30,7 @@ public class BatteryService {
         return new BatteriesStatisticsDTO(batteryDTOS,
                 new BatteriesStatisticsDTO.Statistics(sum, average));
     }
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<BatteryDTO> saveAll(List<BatteryDTO> batteries) {
         return batteryRepository
                 .saveAll(batteries
